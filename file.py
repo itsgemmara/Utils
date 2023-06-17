@@ -6,14 +6,11 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 
-def send_files_by_mail(send_to, subject, body, files=None,):
+def send_files_by_mail(smtp_username, smtp_password, sender, send_to, subject, body, files=None,):
 
     msg = MIMEMultipart()
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    smtp_username = 'reselians.kaviani@gmail.com'
-    smtp_password = 'ngzmoxmbhmgjvugk'
-    sender = 'reselians.kaviani@gmail.com'
     body = body
     recipient = send_to
 
