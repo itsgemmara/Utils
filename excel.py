@@ -110,3 +110,46 @@ def send_excel_by_email(
     smtp.login(smtp_username, smtp_password)
     smtp.sendmail(sender, [recipient], msg.as_string())
     smtp.quit()
+
+
+def create_highlight_style(df):
+    c1 = 'background-color: #CDCDCD'
+    c2 = '' 
+    rows_count = len(df.index)
+    colored = list()
+    for i in range(rows_count):
+        if i % 2 != 0:
+            colored.append(i)
+    columns = df.columns
+    m = df[df.index%2 != 0]
+    df1 = pd.DataFrame(c2, index=df.index, columns=columns)
+    for i in colored:
+        df1.loc[i] = c1
+    return df1
+
+
+def save_excel_with_style(df, output_filename, sheet_name):
+    df.reset_index(drop=True, inplace=True)
+    writer = pd.ExcelWriter(output_filename, engine='xlsxwriter')
+    df.style.apply(create_highlight_style,axis=None).to_excel(writer, sheet_name=sheet_name, index=False)
+    workbook  = writer.book
+    formater = workbook.add_format({'border':1})
+
+    worksheet = writer.sheets[sheet_name]
+    worksheet.set_column(0, 0, 18, formater)
+    worksheet.set_column(1, 1, 10, formater)
+    worksheet.set_column(2, 2, 26, formater)
+    worksheet.set_column(3, 3, 6, formater)
+    worksheet.set_column(4, 4, 6, formater)
+    worksheet.set_column(5, 5, 6, formater)
+    worksheet.set_column(6, 6, 10, formater)
+    worksheet.set_column(7, 7, 10, formater)
+    worksheet.set_column(8, 8, 10, formater)
+    worksheet.set_paper(9)
+    worksheet.set_margins(left=0.19, right=0.19, top=0.5, bottom=0)
+    time = str(jdt.now()).split()[0]
+    worksheet.set_header(header=f"{time}/{sheet_name}", margin=0)
+    worksheet.set_footer(footer="&CPage &P of &N", margin=0)
+    worksheet.set_zoom(90)
+    writer.save()
+
