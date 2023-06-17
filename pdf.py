@@ -4,7 +4,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
 import pdfplumber
-
+import PyPDF2
 
 def send_pdf_by_email(recipient_email, pdf_file_name, smtp_usernam, smtp_password, sender, subject='PDF file',  ):
 
@@ -60,4 +60,24 @@ def pdf_reader():
         for i in sentences:
             print(i, '\n \n \n \n')
 
-    print(sentence)
+    return sentence
+
+def pdf_reader2():
+    pdf = PyPDF2.PdfFileReader(open('resume.pdf', "rb"))
+    sentences = list()
+    for page in pdf.pages:
+        text = page.extractText()
+        sentence = ''
+        for i in text:
+            if i != '.' and i != '؛' and i != ';':
+                sentence += i
+            else:
+                sentences.append(sentence)
+                sentence = ''
+    
+    for i in sentences:
+        print(i, '\n')
+        
+    return sentences
+
+
