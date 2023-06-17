@@ -5,14 +5,11 @@ from email.mime.text import MIMEText
 from email import encoders
 
 
-def send_pdf_by_email(recipient_email, pdf_file_name, subject='PDF file'):
+def send_pdf_by_email(recipient_email, pdf_file_name, smtp_usernam, smtp_password, sender, subject='PDF file',  ):
 
     # Email configuration
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    smtp_username = 'reselians.kaviani@gmail.com'
-    smtp_password = 'muwiavrxaqluzebg'
-    sender = 'reselians.kaviani@gmail.com'
     recipient = recipient_email
     body = 'Please find attached the PDF file.'
 
