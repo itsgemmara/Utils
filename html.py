@@ -34,3 +34,5 @@ def email_html(html, recipient_email,):
     s.sendmail(sender, recipient_email, msg.as_string())
     s.quit()
 
+
+
