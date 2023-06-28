@@ -9,10 +9,10 @@ def get_html_file(filename):
     return html_as_string
 
 
-def email_html(html, recipient_email,):
+def email_html(html, recipient_email, sender):
     # Create message container - the correct MIME type is multipart/alternative.
     msg = MIMEMultipart('alternative')
-    sender = 'reselians.kaviani@gmail.com'
+    sender = sender
     msg['Subject'] = "html file"
     msg['From'] = sender
     msg['To'] = recipient_email
