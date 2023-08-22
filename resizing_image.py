@@ -1,4 +1,6 @@
-# from PIL import Image
+import os
+from PIL import Image
+
 
 # def resize_image(input_path, output_path, new_width_cm):
 #     # Open the image
@@ -23,9 +25,6 @@
 
 # resize_image(input_path, output_path, new_width_cm)
 
-
-import os
-from PIL import Image
 
 def resize_images_in_folder(input_folder, output_folder, new_width_cm):
     if not os.path.exists(output_folder):

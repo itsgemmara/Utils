@@ -19,7 +19,7 @@ def _worker():
             _queue.task_done()  # so we can join at exit
 
 def postpone(func):
-    def decorator(*args, **kwargs):
+    def decorator(*args, **kwadef rgs):
         _queue.put((func, args, kwargs))
     return decorator
 

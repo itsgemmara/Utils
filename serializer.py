@@ -14,7 +14,3 @@ class CustomPKRelatedField(serializers.PrimaryKeyRelatedField):
         # Use a specific field rather than model stringification
         return getattr(instance, self.display_field)
 
-
-# class ObjectTypeSerializer(serializers.ModelSerializer):
-#     object_fields = CustomPKRelatedField(queryset=Parameter.objects.all(), many=True)
-#     instance_fields = CustomPKRelatedField(queryset=Parameter.objects.all(), many=True)
